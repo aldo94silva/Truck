@@ -7,6 +7,9 @@ import com.TruckFlow.repository.CaminhaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static java.util.Objects.nonNull;
 
 @Service
@@ -61,6 +64,17 @@ public class CaminhaoService {
       caminhaoRepository.save(caminhaoAtualizado);
       return converterCaminhao(caminhaoAtualizado);
 
+    }
+
+    public List<CaminhaoDTO> listarCaminhaos() {
+        return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).collect(Collectors.toList());
+    }
+
+    public CaminhaoDTO buscarCaminhaoPorId(Long id) {
+        Caminhao caminhao = caminhaoRepository.findById(id)
+                .orElseThrow(() -> new BusinessExeption("Caminhão não encontrado"));
+
+        return converterCaminhao(caminhao);
     }
 
 }
