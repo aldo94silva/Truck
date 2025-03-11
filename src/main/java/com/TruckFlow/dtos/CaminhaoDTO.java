@@ -19,4 +19,7 @@ public class CaminhaoDTO {
 
     private String capacidade;
 
+    public Object findByPlaca(String placa) {
+        return null;
+    }
 }

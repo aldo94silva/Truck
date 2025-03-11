@@ -1,0 +1,19 @@
+meta {
+  name: Criar Carga
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/carga
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "descricao": "Carga de peças automotivas",
+      "peso": 1800.5,
+      "tipo_de_carga": "Industrial"
+    }
+}

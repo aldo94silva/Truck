@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "motorista")
+@Table(name = "tb_motorista")
 public class Motorista {
 
     @Id
@@ -16,7 +16,10 @@ public class Motorista {
     @Column(nullable = true)
     private String nome;
 
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
+    private String cpf;
+
+    @Column(nullable = true, unique = true)
     private String cnh;
 
     @Column(nullable = true)

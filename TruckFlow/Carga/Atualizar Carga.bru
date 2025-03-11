@@ -1,0 +1,19 @@
+meta {
+  name: Atualizar Carga
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/carga/8
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "descricao": "Carga de peças para carro",
+      "peso": 180.50,
+      "tipo_de_carga": "Sub"
+    }
+}

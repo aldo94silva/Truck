@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "caminhao")
+@Table(name = "tb_caminhao")
 public class Caminhao {
 
     @Id
@@ -16,7 +16,7 @@ public class Caminhao {
     @Column(nullable = true)
     private String marca;
 
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private String placa;
 
     @Column(nullable = true)

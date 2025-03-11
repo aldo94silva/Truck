@@ -4,6 +4,7 @@ import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.repository.CaminhaoRepository;
+import com.TruckFlow.spec.CaminhaoSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +17,18 @@ import static java.util.Objects.nonNull;
 public class CaminhaoService {
 
     private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
+    private static final String MSG_CAMINHAO = "Caminhão não encontrado";
 
     @Autowired
     CaminhaoRepository caminhaoRepository;
 
-    public CaminhaoDTO cadastarCaminhao(CaminhaoDTO caminhaoDTO){
-        Caminhao placaExistente = caminhaoRepository.findByMarca(caminhaoDTO.getMarca());
+    @Autowired
+    private CaminhaoSpec caminhaoSpec;
 
-        if(nonNull(placaExistente)){
-            throw new BusinessExeption(String.format(MSG_PLACA, caminhaoDTO.getMarca()));
-        }
+    public CaminhaoDTO cadastarCaminhao(CaminhaoDTO caminhaoDTO){
+
+        Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
+        caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
 
         Caminhao caminhao = converterCaminhaoDTO(caminhaoDTO);
         caminhao = caminhaoRepository.save(caminhao);
@@ -72,7 +75,7 @@ public class CaminhaoService {
 
     public CaminhaoDTO buscarCaminhaoPorId(Long id) {
         Caminhao caminhao = caminhaoRepository.findById(id)
-                .orElseThrow(() -> new BusinessExeption("Caminhão não encontrado"));
+                .orElseThrow(() -> new BusinessExeption(MSG_CAMINHAO));
 
         return converterCaminhao(caminhao);
     }
