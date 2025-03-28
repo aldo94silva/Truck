@@ -1,25 +1,22 @@
 package com.TruckFlow.dtos;
 
 
-
+import com.TruckFlow.models.Frete;
 import lombok.Data;
 
 import java.util.List;
 
 
 @Data
-public class MotoristaDTO {
+public class ClienteDTO {
 
     private Long id;
 
     private String nome;
 
-    private String cpf;
-
-    private String cnh;
+    private String cnpj_cpf;
 
     private String telefone;
 
-    private List<CaminhaoDTO> caminhoes;
-
+    private List<FreteDTO> fretes;
 }

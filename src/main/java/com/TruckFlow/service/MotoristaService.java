@@ -1,12 +1,15 @@
 package com.TruckFlow.service;
 
+import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
+import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Motorista;
 import com.TruckFlow.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,20 +22,15 @@ public class MotoristaService {
     @Autowired
     private MotoristaRepository motoristaRepository;
 
-//    @Autowired
-//    private MotoristaSpec motoristaSpec;
 
-    public MotoristaDTO cadastarmotorista(MotoristaDTO motoristaDTO){
+    public MotoristaDTO cadastarMotorista(MotoristaDTO motoristaDTO){
 
-//        Motorista placaExistente = motoristaRepository.findByPlaca(motoristaDTO.getPlaca());
-//        motoristaSpec.verificarSeExistePlacaDuplicada(placaExistente);
-
-        Motorista motorista = convertermotoristaDTO(motoristaDTO);
+        Motorista motorista = converterMotoristaDTO(motoristaDTO);
         motorista = motoristaRepository.save(motorista);
-        return convertermotorista(motorista);
+        return converterMotorista(motorista);
     }
 
-    public MotoristaDTO convertermotorista(Motorista motoristas) {
+    public MotoristaDTO converterMotorista(Motorista motoristas) {
        MotoristaDTO motoristaDTO = new MotoristaDTO();
        motoristaDTO.setId(motoristas.getId());
        motoristaDTO.setNome(motoristas.getNome());
@@ -42,7 +40,7 @@ public class MotoristaService {
        return motoristaDTO;
     }
 
-    public Motorista convertermotoristaDTO(MotoristaDTO motoristaDTO) {
+    public Motorista converterMotoristaDTO(MotoristaDTO motoristaDTO) {
         Motorista motorista = new Motorista();
         motorista.setId(motoristaDTO.getId());
         motorista.setNome(motoristaDTO.getNome());
@@ -57,22 +55,21 @@ public class MotoristaService {
     }
 
     public MotoristaDTO updatemotorista(Long id, MotoristaDTO motoristaDTO) {
-      Motorista motoristaAtualizado = convertermotoristaDTO(motoristaDTO);
+      Motorista motoristaAtualizado = converterMotoristaDTO(motoristaDTO);
       motoristaAtualizado.setId(id);
       motoristaRepository.save(motoristaAtualizado);
-      return convertermotorista(motoristaAtualizado);
+      return converterMotorista(motoristaAtualizado);
 
     }
 
     public List<MotoristaDTO> listarmotoristas() {
-        return motoristaRepository.findAll().stream().map(motorista -> convertermotorista(motorista)).collect(Collectors.toList());
+        return motoristaRepository.findAll().stream().map(motorista -> converterMotorista(motorista)).collect(Collectors.toList());
     }
 
     public MotoristaDTO buscarmotoristaPorId(Long id) {
         Motorista motorista = motoristaRepository.findById(id)
                 .orElseThrow(() -> new BusinessExeption(MSG_motorista));
 
-        return convertermotorista(motorista);
+        return converterMotorista(motorista);
     }
-
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/motorista")
+@RequestMapping("/motoristas")
 public class MotoristaController {
 
     @Autowired
@@ -30,15 +30,15 @@ public class MotoristaController {
     }
 
     @PostMapping()
-    public ResponseEntity<MotoristaDTO> createMotorista (@RequestBody MotoristaDTO MotoristaDTO){
-            MotoristaDTO caminhao = motoristaService.cadastarmotorista(MotoristaDTO);
-            return ResponseEntity.ok(MotoristaDTO);
+    public ResponseEntity<MotoristaDTO> createMotorista (@RequestBody MotoristaDTO motoristaDTO){
+            MotoristaDTO motorista = motoristaService.cadastarMotorista(motoristaDTO);
+            return ResponseEntity.ok(motorista);
         }
 
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void> deleteMotorista (@PathVariable Long id){
-            motoristaService.deleteMotorista(id);
+            motoristaService.deletemotorista(id);
             return ResponseEntity.noContent().build();
         }
 

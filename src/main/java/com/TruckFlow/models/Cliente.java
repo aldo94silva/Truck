@@ -4,6 +4,8 @@ package com.TruckFlow.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "tb_cliente")
@@ -21,4 +23,7 @@ public class Cliente {
 
     @Column(nullable = true)
     private String telefone;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Frete> fretes;
 }

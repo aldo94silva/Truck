@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -33,5 +34,20 @@ public class Frete {
 
     @Column(nullable = true)
     private String valor_frete;
+
+    @ManyToOne
+    @JoinColumn(name = "caminhao_id")
+    private Caminhao caminhao;
+
+    @OneToMany(mappedBy = "frete")
+    private List<Carga> cargas;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
 }

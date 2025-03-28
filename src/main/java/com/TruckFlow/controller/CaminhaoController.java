@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/caminhao")
+@RequestMapping("/caminhoes")
 public class CaminhaoController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class CaminhaoController {
     @PostMapping()
     public ResponseEntity<CaminhaoDTO> createCaminhao (@RequestBody CaminhaoDTO caminhaoDTO){
             CaminhaoDTO caminhao = caminhaoService.cadastarCaminhao(caminhaoDTO);
-            return ResponseEntity.ok(caminhaoDTO);
+            return ResponseEntity.ok(caminhao);
         }
 
 

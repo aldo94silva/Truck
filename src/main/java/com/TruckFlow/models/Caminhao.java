@@ -4,6 +4,8 @@ package com.TruckFlow.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "tb_caminhao")
@@ -27,5 +29,12 @@ public class Caminhao {
 
     @Column(nullable = true)
     private String capacidade;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "motorista_id", nullable = true)
+    private Motorista motorista;
+
+    @OneToMany(mappedBy = "caminhao")
+    private List<Frete> fretes;
 
 }

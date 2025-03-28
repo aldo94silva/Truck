@@ -20,4 +20,9 @@ public class Carga {
 
     @Column(nullable = true)
     private String tipo_de_carga;
+
+    @ManyToOne
+    @JoinColumn(name = "frete_id")
+    private Frete frete;
+
 }

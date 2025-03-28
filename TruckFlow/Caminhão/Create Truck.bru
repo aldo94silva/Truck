@@ -5,18 +5,24 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/caminhao
+  url: http://localhost:8080/caminhoes
   body: json
   auth: none
 }
 
 body:json {
   {
-          "marca": "Volkswagen",
-          "placa": "GHI2345",
-          "modelo": "Constellation 25.420",
-          "cor": "Branco",
-          "capacidade": "36 toneladas"
+      "marca": "Volvo",
+      "placa": "ABC-1234",
+      "modelo": "FH 540 6x4",
+      "cor": "Branco",
+      "capacidade": "70 toneladas",
+      "motoristaDTO": {
+          "id": 1,
+          "nome": "Carlos Souza",
+          "cnh": "123456789"
+      }
   }
+  
   
 }
