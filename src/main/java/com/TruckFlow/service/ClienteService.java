@@ -1,10 +1,9 @@
 package com.TruckFlow.service;
 
-import com.TruckFlow.dtos.CaminhaoDTO;
+import com.TruckFlow.dtos.ClienteDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.models.Caminhao;
-import com.TruckFlow.repository.CaminhaoRepository;
-import com.TruckFlow.spec.CaminhaoSpec;
+import com.TruckFlow.models.Cliente;
+import com.TruckFlow.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,68 +13,65 @@ import java.util.stream.Collectors;
 @Service
 public class ClienteService {
 
-    private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
-    private static final String MSG_CAMINHAO = "Caminhão não encontrado";
+
+    private static final String MSG_cliente = "Cliente não encontrado";
 
     @Autowired
-    CaminhaoRepository caminhaoRepository;
+    ClienteRepository clienteRepository;
 
-    @Autowired
-    private CaminhaoSpec caminhaoSpec;
+//    @Autowired
+//    private ClienteSpec clienteSpec;
 
-    public CaminhaoDTO cadastarCaminhao(CaminhaoDTO caminhaoDTO){
+    public ClienteDTO cadastarCliente(ClienteDTO clienteDTO){
 
-        Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
-        caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
+//        Cliente placaExistente = clienteRepository.findByPlaca(clienteDTO.getPlaca());
+//        clienteSpec.verificarSeExistePlacaDuplicada(placaExistente);
 
-        Caminhao caminhao = converterCaminhaoDTO(caminhaoDTO);
-        caminhao = caminhaoRepository.save(caminhao);
-        return converterCaminhao(caminhao);
+        Cliente cliente = converterClienteDTO(clienteDTO);
+        cliente = clienteRepository.save(cliente);
+        return converterCliente(cliente);
     }
 
-    public CaminhaoDTO converterCaminhao(Caminhao caminhaos) {
-       CaminhaoDTO caminhaoDTO = new CaminhaoDTO();
-       caminhaoDTO.setId(caminhaos.getId());
-       caminhaoDTO.setMarca(caminhaos.getMarca());
-       caminhaoDTO.setPlaca(caminhaos.getPlaca());
-       caminhaoDTO.setModelo(caminhaos.getModelo());
-       caminhaoDTO.setCor(caminhaos.getCor());
-       caminhaoDTO.setCapacidade(caminhaos.getCapacidade());
-       return caminhaoDTO;
+    public ClienteDTO converterCliente(Cliente clientes) {
+       ClienteDTO clienteDTO = new ClienteDTO();
+       clienteDTO.setId(clientes.getId());
+       clienteDTO.setNome(clientes.getNome());
+       clienteDTO.setCnpj_cpf(clientes.getCnpj_cpf());
+       clienteDTO.setTelefone(clientes.getTelefone());
+       return clienteDTO;
     }
 
-    public Caminhao converterCaminhaoDTO(CaminhaoDTO caminhaoDTO) {
-        Caminhao caminhao = new Caminhao();
-        caminhao.setId(caminhaoDTO.getId());
-        caminhao.setMarca(caminhaoDTO.getMarca());
-        caminhao.setPlaca(caminhaoDTO.getPlaca());
-        caminhao.setModelo(caminhaoDTO.getModelo());
-        caminhao.setCor(caminhaoDTO.getCor());
-        caminhao.setCapacidade(caminhaoDTO.getCapacidade());
-        return caminhao;
+    public Cliente converterClienteDTO(ClienteDTO clienteDTO) {
+        Cliente cliente = new Cliente();
+        cliente.setId(clienteDTO.getId());
+        cliente.setNome(clienteDTO.getNome());
+        cliente.setCnpj_cpf(clienteDTO.getCnpj_cpf());
+        cliente.setTelefone(clienteDTO.getTelefone());
+        return cliente;
     }
 
-    public void deleteCaminhao(Long id){
-        caminhaoRepository.deleteById(id);
+    public void deleteCliente(Long id){
+        clienteRepository.deleteById(id);
     }
 
-    public CaminhaoDTO updateCaminhao(Long id, CaminhaoDTO caminhaoDTO) {
-      Caminhao caminhaoAtualizado = converterCaminhaoDTO(caminhaoDTO);
-      caminhaoAtualizado.setId(id);
-      caminhaoRepository.save(caminhaoAtualizado);
-      return converterCaminhao(caminhaoAtualizado);
+    public ClienteDTO updateCliente(Long id, ClienteDTO clienteDTO) {
+      Cliente clienteAtualizado = converterClienteDTO(clienteDTO);
+      clienteAtualizado.setId(id);
+      clienteRepository.save(clienteAtualizado);
+      return converterCliente(clienteAtualizado);
 
     }
 
-    public List<CaminhaoDTO> listarCaminhaos() {
-        return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).collect(Collectors.toList());
+    public List<ClienteDTO> listarClientes() {
+        return clienteRepository.findAll().stream().map(cliente -> converterCliente(cliente))
+                .collect(Collectors.toList());
     }
 
-    public CaminhaoDTO buscarCaminhaoPorId(Long id) {
-        Caminhao caminhao = caminhaoRepository.findById(id)
-                .orElseThrow(() -> new BusinessExeption(MSG_CAMINHAO));
+    public ClienteDTO buscarClientePorId(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new BusinessExeption(MSG_cliente));
 
-        return converterCaminhao(caminhao);
+        return converterCliente(cliente);
     }
 
 }
