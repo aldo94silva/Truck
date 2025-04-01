@@ -2,7 +2,6 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.EnderecoDTO;
-import com.TruckFlow.repository.EnderecoRepository;
 import com.TruckFlow.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +40,7 @@ public class EnderecoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EnderecoDTO> updateEnderecos(@PathVariable Long id, @RequestBody EnderecoDTO EnderecoDTO) {
+    public ResponseEntity<EnderecoDTO> updateEndereco(@PathVariable Long id, @RequestBody EnderecoDTO EnderecoDTO) {
         EnderecoDTO enderecoAtualizado = enderecoService.updateEndereco(id, EnderecoDTO);
         return ResponseEntity.ok(enderecoAtualizado);
     }

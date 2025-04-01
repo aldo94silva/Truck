@@ -2,6 +2,7 @@ package com.TruckFlow.spec;
 
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
+import com.TruckFlow.models.Motorista;
 import com.TruckFlow.repository.CaminhaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ public class MotoristaSpec {
     private CaminhaoRepository caminhaoRepository;
 
     private static final String MSG_ID = "Id não pode ser nulo";
-    private static final String MSG_PLACA = "Caminhão já cadastrado com esta placa: %s";
+    private static final String MSG_CPF = "CPF já cadastrado com o motorista: %s";
+    private static final String MSG_CNH = "CNH cadastrada com o motorista: %s";
+    private static final String MSG_TELEFONE = "Telefone cadastrado com o motorista: %s";
 
 
     public void verificarCampoIdNulo(Long id) {
@@ -24,10 +27,24 @@ public class MotoristaSpec {
 
     }
 
-    public void verificarSeExistePlacaDuplicada(Caminhao caminhao) {
-        if (nonNull(caminhao)) {
+    public void verificarSeExisteCpfDuplicada(Motorista motorista) {
+        if (nonNull(motorista)) {
             throw new BusinessExeption(
-                    String.format(MSG_PLACA, caminhao.getPlaca()));
+                    String.format(MSG_CPF, motorista.getCpf()));
+        }
+    }
+
+    public void verificarSeExisteCnhDuplicada(Motorista motorista) {
+        if (nonNull(motorista)) {
+            throw new BusinessExeption(
+                    String.format(MSG_CNH, motorista.getCnh()));
+        }
+    }
+
+    public void verificarSeExisteTelefoneDuplicada(Motorista motorista) {
+        if (nonNull(motorista)) {
+            throw new BusinessExeption(
+                    String.format(MSG_CNH, motorista.getTelefone()));
         }
     }
 

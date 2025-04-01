@@ -1,17 +1,17 @@
 package com.TruckFlow.service;
 
 import com.TruckFlow.dtos.CaminhaoDTO;
-import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.repository.CaminhaoRepository;
-import com.TruckFlow.repository.MotoristaRepository;
 import com.TruckFlow.spec.CaminhaoSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 
 @Service
@@ -71,19 +71,26 @@ public class CaminhaoService {
         return caminhao;
     }
 
-    public void deleteCaminhao(Long id) {
-        caminhaoRepository.deleteById(id);
+    public void deleteCaminhao(CaminhaoDTO caminhaoDTO) {
+        if (isNull(caminhaoDTO.getId())) {
+            throw new BusinessExeption("Caminhão não encontrado");
+        }
+        caminhaoRepository.deleteById(caminhaoDTO.getId());
     }
 
-    public CaminhaoDTO updateCaminhao(Long id, CaminhaoDTO caminhaoDTO) {
+
+    public CaminhaoDTO updateCaminhao(CaminhaoDTO caminhaoDTO) {
+        Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
+        caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
+
         Caminhao caminhaoAtualizado = converterCaminhaoDTO(caminhaoDTO);
-        caminhaoAtualizado.setId(id);
         caminhaoRepository.save(caminhaoAtualizado);
         return converterCaminhao(caminhaoAtualizado);
 
     }
 
     public List<CaminhaoDTO> listarCaminhaos() {
+
         return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).
                 collect(Collectors.toList());
     }

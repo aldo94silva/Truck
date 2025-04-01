@@ -2,8 +2,10 @@ package com.TruckFlow.service;
 
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
+import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Motorista;
 import com.TruckFlow.repository.MotoristaRepository;
+import com.TruckFlow.spec.MotoristaSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,19 @@ public class MotoristaService {
     @Autowired
     MotoristaRepository motoristaRepository;
 
+    @Autowired
+    MotoristaSpec motoristaSpec;
+
 
     public MotoristaDTO cadastarMotorista(MotoristaDTO motoristaDTO) {
+        Motorista cpfExistente = motoristaRepository.findByCpf(motoristaDTO.getCpf());
+        motoristaSpec.verificarSeExisteCpfDuplicada(cpfExistente);
+
+        Motorista cnhExistente = motoristaRepository.findByCnh(motoristaDTO.getCnh());
+        motoristaSpec.verificarSeExisteCnhDuplicada(cnhExistente);
+
+        Motorista telefoneExistente = motoristaRepository.findBytelefone(motoristaDTO.getTelefone());
+        motoristaSpec.verificarSeExisteTelefoneDuplicada(telefoneExistente);
 
         Motorista motorista = converterMotoristaDTO(motoristaDTO);
         motorista = motoristaRepository.save(motorista);
@@ -60,6 +73,8 @@ public class MotoristaService {
     }
 
     public List<MotoristaDTO> listarmotoristas() {
+
+
         return motoristaRepository.findAll().stream().map(motorista -> converterMotorista(motorista)).collect(Collectors.toList());
     }
 

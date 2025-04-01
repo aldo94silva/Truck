@@ -2,6 +2,7 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.CaminhaoDTO;
+import com.TruckFlow.dtos.EnderecoDTO;
 import com.TruckFlow.service.CaminhaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,14 +35,14 @@ public class CaminhaoController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCaminhao(@PathVariable Long id) {
-        caminhaoService.deleteCaminhao(id);
+    public ResponseEntity<Void> deleteCaminhao(@RequestBody CaminhaoDTO caminhaoDTO) {
+        CaminhaoDTO caminhao =caminhaoService.cadastarCaminhao(caminhaoDTO);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CaminhaoDTO> updateCaminhao(@PathVariable Long id, @RequestBody CaminhaoDTO caminhaoDTO) {
-        CaminhaoDTO caminhaoAtualizado = caminhaoService.updateCaminhao(id, caminhaoDTO);
-        return ResponseEntity.ok(caminhaoAtualizado);
+    @PutMapping
+    public ResponseEntity<CaminhaoDTO> updateCaminhao(@RequestBody CaminhaoDTO caminhaoDTO) {
+        return ResponseEntity.ok(caminhaoService.updateCaminhao(caminhaoDTO));
     }
+
 }
