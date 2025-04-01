@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_carga")
-public class Carga {
+public class Carga{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public class Carga {
     @Column(nullable = true)
     private String tipo_de_carga;
 
-    @ManyToOne
-    @JoinColumn(name = "frete_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "frete_id", nullable = true)
     private Frete frete;
 
     public Carga() {

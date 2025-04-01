@@ -1,9 +1,9 @@
 package com.TruckFlow.service;
 
-import com.TruckFlow.dtos.FreteDTO;
-import com.TruckFlow.dtos.MotoristaDTO;
+import com.TruckFlow.dtos.*;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Frete;
+import com.TruckFlow.repository.EnderecoRepository;
 import com.TruckFlow.repository.FreteRepository;
 import com.TruckFlow.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FreteService {
+public class    FreteService {
 
     private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
     private static final String MSG_CAMINHAO = "Caminhão não encontrado";
@@ -27,6 +27,14 @@ public class FreteService {
     @Autowired
     private MotoristaRepository motoristaRepository;
 
+    @Autowired
+    private CaminhaoService caminhaoService;
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private EnderecoService enderecoService;
 
     public FreteDTO cadastarFrete(FreteDTO freteDTO){
         Frete frete = converterFreteDTO(freteDTO);
@@ -34,15 +42,25 @@ public class FreteService {
         return converterFrete(frete);
     }
 
-    public FreteDTO converterFrete(Frete fretes) {
+    public FreteDTO converterFrete(Frete frete) {
         FreteDTO freteDTO = new FreteDTO();
-        freteDTO.setId(fretes.getId());
-        freteDTO.setOrigem(fretes.getOrigem());
-        freteDTO.setDestino(fretes.getDestino());
-        freteDTO.setData_saida(fretes.getData_saida());
-        freteDTO.setData_chegada(fretes.getData_chegada());
-        freteDTO.setPeso_carga(fretes.getPeso_carga());
-        freteDTO.setValor_frete(fretes.getValor_frete());
+        freteDTO.setId(frete.getId());
+        freteDTO.setOrigem(frete.getOrigem());
+        freteDTO.setDestino(frete.getDestino());
+        freteDTO.setData_saida(frete.getData_saida());
+        freteDTO.setData_chegada(frete.getData_chegada());
+        freteDTO.setPeso_carga(frete.getPeso_carga());
+        freteDTO.setValor_frete(frete.getValor_frete());
+
+        freteDTO.setCaminhao(frete.getCaminhao() != null ?
+                caminhaoService.buscarCaminhaoPorId(frete.getCaminhao().getId()) : null);
+
+        freteDTO.setCliente(frete.getCliente() != null ?
+                clienteService.buscarClientePorId(frete.getCliente().getId()) : null);
+
+        freteDTO.setEndereco(frete.getEndereco() != null ?
+                enderecoService.buscarEnderecoPorId(frete.getEndereco().getId()) : null);
+
         return freteDTO;
     }
 
@@ -56,6 +74,16 @@ public class FreteService {
         frete.setData_chegada(freteDTO.getData_chegada());
         frete.setPeso_carga(freteDTO.getPeso_carga());
         frete.setValor_frete(freteDTO.getValor_frete());
+
+        frete.setCaminhao(freteDTO.getCaminhao() != null ?
+                caminhaoService.converterCaminhaoDTO(freteDTO.getCaminhao()) : null);
+
+        frete.setCliente(freteDTO.getCliente() != null ?
+                clienteService.converterClienteDTO(freteDTO.getCliente()) : null);
+
+        frete.setEndereco(freteDTO.getEndereco() != null ?
+                enderecoService.converterEnderecoDTO(freteDTO.getEndereco()) : null);
+
         return frete;
     }
 

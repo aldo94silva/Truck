@@ -4,7 +4,6 @@ import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
-import com.TruckFlow.models.Motorista;
 import com.TruckFlow.repository.CaminhaoRepository;
 import com.TruckFlow.repository.MotoristaRepository;
 import com.TruckFlow.spec.CaminhaoSpec;
@@ -12,15 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.nonNull;
 
 @Service
 public class CaminhaoService {
 
-    private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
     private static final String MSG_CAMINHAO = "Caminhão não encontrado";
 
     @Autowired
@@ -56,12 +52,8 @@ public class CaminhaoService {
         caminhaoDTO.setCapacidade(caminhaos.getCapacidade());
 
         // Verifica se o caminhão tem motorista antes de buscar
-        if (caminhaos.getMotorista() != null) {
-            MotoristaDTO motoristaDTO = motoristaService.buscarmotoristaPorId(caminhaos.getMotorista().getId());
-            caminhaoDTO.setMotorista(motoristaDTO);
-        } else {
-            caminhaoDTO.setMotorista(null);
-        }
+        caminhaoDTO.setMotorista(caminhaos.getMotorista() != null ?
+                motoristaService.buscarmotoristaPorId(caminhaos.getMotorista().getId()) : null);
 
         return caminhaoDTO;
     }
@@ -76,11 +68,8 @@ public class CaminhaoService {
         caminhao.setCor(caminhaoDTO.getCor());
         caminhao.setCapacidade(caminhaoDTO.getCapacidade());
 
-        if (caminhaoDTO.getMotorista() != null) {
-            caminhao.setMotorista(motoristaService.converterMotoristaDTO(caminhaoDTO.getMotorista()));
-        } else {
-            caminhao.setMotorista(null);
-        }
+        caminhao.setMotorista(caminhaoDTO.getMotorista() != null ?
+                motoristaService.converterMotoristaDTO(caminhaoDTO.getMotorista()) : null);
 
         return caminhao;
     }
@@ -98,7 +87,8 @@ public class CaminhaoService {
     }
 
     public List<CaminhaoDTO> listarCaminhaos() {
-        return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).collect(Collectors.toList());
+        return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).
+                collect(Collectors.toList());
     }
 
     public CaminhaoDTO buscarCaminhaoPorId(Long id) {

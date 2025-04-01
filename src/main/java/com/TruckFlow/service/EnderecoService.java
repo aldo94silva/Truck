@@ -19,9 +19,6 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
-    @Autowired
-    private EnderecoService enderecoService;
-
 
     public EnderecoDTO cadastarEndereco(EnderecoDTO enderecoDTO){
 

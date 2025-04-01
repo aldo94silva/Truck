@@ -2,6 +2,8 @@ package com.TruckFlow.service;
 
 import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.CargaDTO;
+import com.TruckFlow.dtos.FreteDTO;
+import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Carga;
@@ -26,6 +28,9 @@ public class CargaService {
     private CargaRepository cargaRepository;
 
     @Autowired
+    private FreteService freteService;
+
+    @Autowired
     private CargaSpec cargaSpec;
 
 
@@ -36,13 +41,18 @@ public class CargaService {
     }
 
     public CargaDTO converterCarga(Carga carga) {
-       CargaDTO cargaDTO = new CargaDTO();
-       cargaDTO.setId(carga.getId());
-       cargaDTO.setDescricao(carga.getDescricao());
-       cargaDTO.setPeso(carga.getPeso());
-       cargaDTO.setTipo_de_carga(carga.getTipo_de_carga());
-       return cargaDTO;
+        CargaDTO cargaDTO = new CargaDTO();
+        cargaDTO.setId(carga.getId());
+        cargaDTO.setDescricao(carga.getDescricao());
+        cargaDTO.setPeso(carga.getPeso());
+        cargaDTO.setTipo_de_carga(carga.getTipo_de_carga());
+
+        cargaDTO.setFrete(carga.getFrete() != null ?
+                freteService.buscarFretePorId(carga.getFrete().getId()) : null);
+
+        return cargaDTO;
     }
+
 
     public Carga converterCargaDTO(CargaDTO cargaDTO) {
         Carga carga = new Carga();
@@ -50,6 +60,10 @@ public class CargaService {
         carga.setDescricao(cargaDTO.getDescricao());
         carga.setPeso(cargaDTO.getPeso());
         carga.setTipo_de_carga(cargaDTO.getTipo_de_carga());
+
+        carga.setFrete(cargaDTO.getFrete() != null ?
+                freteService.converterFreteDTO(cargaDTO.getFrete()) : null);
+
         return carga;
     }
 

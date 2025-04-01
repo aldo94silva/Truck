@@ -43,12 +43,12 @@ public class Frete {
     @OneToMany(mappedBy = "frete")
     private List<Carga> cargas;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "cliente_id", nullable = true)
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "endereco_id", nullable = true)
     private Endereco endereco;
 
     public Frete() {
