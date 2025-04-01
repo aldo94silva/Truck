@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.CargaDTO;
 import com.TruckFlow.service.CargaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,9 @@ public class CargaController {
 
     @PostMapping()
     public ResponseEntity<CargaDTO> createCarga(@RequestBody CargaDTO cargaDTO) {
-        CargaDTO cargaDTO1 = cargaService.cadastarCarga(cargaDTO);
-        return ResponseEntity.ok(cargaDTO);
+        cargaService.cadastarCarga(cargaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(cargaDTO);
     }
 
     @DeleteMapping()

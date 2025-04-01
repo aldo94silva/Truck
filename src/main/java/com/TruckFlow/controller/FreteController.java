@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.FreteDTO;
 import com.TruckFlow.service.FreteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,8 @@ public class FreteController {
     @PostMapping()
     public ResponseEntity<FreteDTO> createFrete(@RequestBody FreteDTO freteDTO) {
         FreteDTO frete = freteService.cadastarFrete(freteDTO);
-        return ResponseEntity.ok(frete);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(frete);
     }
 
     @DeleteMapping()

@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.service.CaminhaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,8 @@ public class CaminhaoController {
     @PostMapping()
     public ResponseEntity<CaminhaoDTO> createCaminhao(@RequestBody CaminhaoDTO caminhaoDTO) {
         CaminhaoDTO caminhao = caminhaoService.cadastarCaminhao(caminhaoDTO);
-        return ResponseEntity.ok(caminhao);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(caminhao);
     }
 
     @DeleteMapping()

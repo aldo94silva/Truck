@@ -1,11 +1,11 @@
 package com.TruckFlow.exceptions;
 
-public class ErroResponse {
+public class ErrorResponse {
 
     private String message;
     private int errorCode;
 
-    public ErroResponse(String message, int errorCode) {
+    public ErrorResponse(String message, int errorCode) {
         this.message = message;
         this.errorCode = errorCode;
     }

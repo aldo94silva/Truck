@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.service.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,8 @@ public class MotoristaController {
     @PostMapping()
     public ResponseEntity<MotoristaDTO> createMotorista(@RequestBody MotoristaDTO motoristaDTO) {
         MotoristaDTO motorista = motoristaService.cadastrarMotorista(motoristaDTO);
-        return ResponseEntity.ok(motorista);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(motorista);
     }
 
     @DeleteMapping()

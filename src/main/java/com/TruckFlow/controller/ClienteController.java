@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.ClienteDTO;
 import com.TruckFlow.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,8 @@ public class ClienteController {
     @PostMapping()
     public ResponseEntity<ClienteDTO> createCliente(@RequestBody ClienteDTO clienteDTO) {
         ClienteDTO cliente = clienteService.cadastarCliente(clienteDTO);
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(cliente);
     }
 
     @DeleteMapping()

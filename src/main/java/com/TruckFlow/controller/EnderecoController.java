@@ -4,6 +4,7 @@ package com.TruckFlow.controller;
 import com.TruckFlow.dtos.EnderecoDTO;
 import com.TruckFlow.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,8 @@ public class EnderecoController {
     @PostMapping()
     public ResponseEntity<EnderecoDTO> createEndereco(@RequestBody EnderecoDTO enderecoDTO) {
         EnderecoDTO endereco = enderecoService.cadastarEndereco(enderecoDTO);
-        return ResponseEntity.ok(endereco);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(endereco);
     }
 
     @DeleteMapping()
