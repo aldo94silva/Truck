@@ -63,17 +63,12 @@ public class CargaService {
     }
 
     public void deleteCarga(CargaDTO cargaDTO) {
-        if (isNull(cargaDTO.getId())) {
-            throw new BusinessExeption("Carga não encontrada");
-        }
-
+        cargaSpec.verificarCampoIdNulo(cargaDTO.getId());
         cargaRepository.deleteById(cargaDTO.getId());
     }
 
     public CargaDTO updateCarga(Long id, CargaDTO cargaDTO) {
         cargaSpec.verificarCampoIdNulo(id);
-
-
         Carga cargaAtualizado = converterCargaDTO(cargaDTO);
         cargaAtualizado.setId(id);
         Carga carga = cargaRepository.findById(cargaDTO.getId())
@@ -83,7 +78,8 @@ public class CargaService {
     }
 
     public List<CargaDTO> listarCargas() {
-        return cargaRepository.findAll().stream().map(carga -> converterCarga(carga)).collect(Collectors.toList());
+        return cargaRepository.findAll().stream().map(carga -> converterCarga(carga))
+                .collect(Collectors.toList());
     }
 
     public CargaDTO buscarCargaPorId(Long id) {

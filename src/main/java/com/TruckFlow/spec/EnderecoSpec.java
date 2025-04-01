@@ -15,8 +15,8 @@ public class EnderecoSpec {
     @Autowired
     private CaminhaoRepository caminhaoRepository;
 
-    private static final String MSG_ID = "Id não pode ser nulo";
-    private static final String MSG_PLACA = "Caminhão já cadastrado com esta placa: %s";
+    private static final String MSG_ID = "Endereco não encontrado";
+
 
 
     public void verificarCampoIdNulo(Long id) {

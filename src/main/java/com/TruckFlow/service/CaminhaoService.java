@@ -39,18 +39,18 @@ public class CaminhaoService {
         return converterCaminhao(caminhao);
     }
 
-    public CaminhaoDTO converterCaminhao(Caminhao caminhaos) {
+    public CaminhaoDTO converterCaminhao(Caminhao caminhoes) {
         CaminhaoDTO caminhaoDTO = new CaminhaoDTO();
-        caminhaoDTO.setId(caminhaos.getId());
-        caminhaoDTO.setMarca(caminhaos.getMarca());
-        caminhaoDTO.setPlaca(caminhaos.getPlaca());
-        caminhaoDTO.setModelo(caminhaos.getModelo());
-        caminhaoDTO.setCor(caminhaos.getCor());
-        caminhaoDTO.setCapacidade(caminhaos.getCapacidade());
+        caminhaoDTO.setId(caminhoes.getId());
+        caminhaoDTO.setMarca(caminhoes.getMarca());
+        caminhaoDTO.setPlaca(caminhoes.getPlaca());
+        caminhaoDTO.setModelo(caminhoes.getModelo());
+        caminhaoDTO.setCor(caminhoes.getCor());
+        caminhaoDTO.setCapacidade(caminhoes.getCapacidade());
 
         // Verifica se o caminhão tem motorista antes de buscar
-        caminhaoDTO.setMotorista(caminhaos.getMotorista() != null ?
-                motoristaService.buscarmotoristaPorId(caminhaos.getMotorista().getId()) : null);
+        caminhaoDTO.setMotorista(caminhoes.getMotorista() != null ?
+                motoristaService.buscarmotoristaPorId(caminhoes.getMotorista().getId()) : null);
 
         return caminhaoDTO;
     }
@@ -71,13 +71,12 @@ public class CaminhaoService {
     }
 
     public void deleteCaminhao(CaminhaoDTO caminhaoDTO) {
-        if (isNull(caminhaoDTO.getId())) {
-            throw new BusinessExeption("Caminhão não encontrado");
-        }
+        caminhaoSpec.verificarCampoIdNulo(caminhaoDTO.getId());
         caminhaoRepository.deleteById(caminhaoDTO.getId());
     }
 
     public CaminhaoDTO updateCaminhao(CaminhaoDTO caminhaoDTO) {
+        caminhaoSpec.verificarCampoIdNulo(caminhaoDTO.getId());
         Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
         caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
 
@@ -88,7 +87,6 @@ public class CaminhaoService {
     }
 
     public List<CaminhaoDTO> listarCaminhaos() {
-
         return caminhaoRepository.findAll().stream().map(caminhao -> converterCaminhao(caminhao)).
                 collect(Collectors.toList());
     }

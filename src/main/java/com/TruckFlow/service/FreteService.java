@@ -6,6 +6,7 @@ import com.TruckFlow.models.Frete;
 import com.TruckFlow.repository.EnderecoRepository;
 import com.TruckFlow.repository.FreteRepository;
 import com.TruckFlow.repository.MotoristaRepository;
+import com.TruckFlow.spec.FreteSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import static java.util.Objects.isNull;
 @Service
 public class FreteService {
 
-    private static final String MSG_CAMINHAO = "Caminhão não encontrado";
+    private static final String MSG_FRETE = "Frete não encontrado";
 
     @Autowired
     FreteRepository freteRepository;
@@ -31,6 +32,8 @@ public class FreteService {
     @Autowired
     EnderecoService enderecoService;
 
+    @Autowired
+    FreteSpec freteSpec;
 
     public FreteDTO cadastarFrete(FreteDTO freteDTO) {
         Frete frete = converterFreteDTO(freteDTO);
@@ -83,9 +86,7 @@ public class FreteService {
     }
 
     public void deleteFrete(FreteDTO freteDTO) {
-        if (isNull(freteDTO.getId())) {
-            throw new BusinessExeption("Frete não encontrado");
-        }
+        freteSpec.verificarCampoIdNulo(freteDTO.getId());
         freteRepository.deleteById(freteDTO.getId());
     }
 
@@ -104,7 +105,7 @@ public class FreteService {
 
     public FreteDTO buscarFretePorId(Long id) {
         Frete frete = freteRepository.findById(id)
-                .orElseThrow(() -> new BusinessExeption(MSG_CAMINHAO));
+                .orElseThrow(() -> new BusinessExeption(MSG_FRETE));
 
         return converterFrete(frete);
     }

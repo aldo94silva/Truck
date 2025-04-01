@@ -17,7 +17,7 @@ public class MotoristaSpec {
     @Autowired
     private CaminhaoRepository caminhaoRepository;
 
-    private static final String MSG_ID = "Id não pode ser nulo";
+    private static final String MSG_ID = "Caminhão não encontrado";
     private static final String MSG_CPF = "CPF já cadastrado com o motorista: %s";
     private static final String MSG_CNH = "CNH cadastrada com o motorista: %s";
     private static final String MSG_TELEFONE = "Telefone cadastrado com o motorista: %s";

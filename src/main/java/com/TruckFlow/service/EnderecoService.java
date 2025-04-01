@@ -4,6 +4,7 @@ import com.TruckFlow.dtos.EnderecoDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Endereco;
 import com.TruckFlow.repository.EnderecoRepository;
+import com.TruckFlow.spec.EnderecoSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class EnderecoService {
     @Autowired
     EnderecoRepository enderecoRepository;
 
+    @Autowired
+    EnderecoSpec enderecoSpec;
 
     public EnderecoDTO cadastarEndereco(EnderecoDTO enderecoDTO) {
 
@@ -55,9 +58,7 @@ public class EnderecoService {
     }
 
     public void deleteEndereco(EnderecoDTO enderecoDTO) {
-        if (isNull(enderecoDTO.getId())) {
-            throw new BusinessExeption("Endereco não encontrado");
-        }
+        enderecoSpec.verificarCampoIdNulo(enderecoDTO.getId());
         enderecoRepository.deleteById(enderecoDTO.getId());
     }
 

@@ -4,6 +4,7 @@ import com.TruckFlow.dtos.ClienteDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Cliente;
 import com.TruckFlow.repository.ClienteRepository;
+import com.TruckFlow.spec.ClienteSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-//    @Autowired
-//    private ClienteSpec clienteSpec;
+    @Autowired
+    private ClienteSpec clienteSpec;
 
     public ClienteDTO cadastarCliente(ClienteDTO clienteDTO) {
 
@@ -50,9 +51,7 @@ public class ClienteService {
     }
 
     public void deleteCliente(ClienteDTO clienteDTO) {
-        if (isNull(clienteDTO.getId())) {
-            throw new BusinessExeption("Cliente não encontrado");
-        }
+        clienteSpec.verificarCampoIdNulo(clienteDTO.getId());
         clienteRepository.deleteById(clienteDTO.getId());
     }
 

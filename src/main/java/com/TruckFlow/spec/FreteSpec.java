@@ -15,8 +15,8 @@ public class FreteSpec {
     @Autowired
     private CaminhaoRepository caminhaoRepository;
 
-    private static final String MSG_ID = "Id não pode ser nulo";
-    private static final String MSG_PLACA = "Caminhão já cadastrado com esta placa: %s";
+    private static final String MSG_ID = "Frete não encontrado";
+
 
 
     public void verificarCampoIdNulo(Long id) {

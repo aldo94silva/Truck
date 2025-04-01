@@ -13,7 +13,7 @@ public class CargaSpec {
     @Autowired
     private CargaRepository cargaRepository;
 
-    private static final String MSG_ID = "Id não pode ser nulo";
+    private static final String MSG_ID = "Carga não encontrada";
 
     public void verificarCampoIdNulo(Long id) {
         if (isNull(id)) throw new BusinessExeption(MSG_ID);

@@ -64,9 +64,7 @@ public class MotoristaService {
     }
 
     public void deletemotorista(MotoristaDTO motoristaDTO) {
-        if (isNull(motoristaDTO.getId())) {
-            throw new BusinessExeption("Caminhão não encontrado");
-        }
+        motoristaSpec.verificarCampoIdNulo(motoristaDTO.getId());
         motoristaRepository.deleteById(motoristaDTO.getId());
     }
 
