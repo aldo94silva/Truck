@@ -13,30 +13,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class    FreteService {
+public class FreteService {
 
-    private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
     private static final String MSG_CAMINHAO = "Caminhão não encontrado";
 
     @Autowired
     FreteRepository freteRepository;
 
     @Autowired
-    private MotoristaService motoristaService;
+    CaminhaoService caminhaoService;
 
     @Autowired
-    private MotoristaRepository motoristaRepository;
+    ClienteService clienteService;
 
     @Autowired
-    private CaminhaoService caminhaoService;
+    EnderecoService enderecoService;
 
-    @Autowired
-    private ClienteService clienteService;
-
-    @Autowired
-    private EnderecoService enderecoService;
-
-    public FreteDTO cadastarFrete(FreteDTO freteDTO){
+    public FreteDTO cadastarFrete(FreteDTO freteDTO) {
         Frete frete = converterFreteDTO(freteDTO);
         frete = freteRepository.save(frete);
         return converterFrete(frete);
@@ -87,15 +80,15 @@ public class    FreteService {
         return frete;
     }
 
-    public void deleteFrete(Long id){
+    public void deleteFrete(Long id) {
         freteRepository.deleteById(id);
     }
 
     public FreteDTO updateFrete(Long id, FreteDTO freteDTO) {
-      Frete freteAtualizado = converterFreteDTO(freteDTO);
-      freteAtualizado.setId(id);
-      freteRepository.save(freteAtualizado);
-      return converterFrete(freteAtualizado);
+        Frete freteAtualizado = converterFreteDTO(freteDTO);
+        freteAtualizado.setId(id);
+        freteRepository.save(freteAtualizado);
+        return converterFrete(freteAtualizado);
 
     }
 

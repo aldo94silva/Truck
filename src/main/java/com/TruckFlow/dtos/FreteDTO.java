@@ -4,11 +4,12 @@ import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Carga;
 import com.TruckFlow.models.Cliente;
 import com.TruckFlow.models.Endereco;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
-@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FreteDTO {
 
     private Long id;

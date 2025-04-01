@@ -1,29 +1,26 @@
 package com.TruckFlow.service;
 
-import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Motorista;
 import com.TruckFlow.repository.MotoristaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class MotoristaService {
 
-    private static final String MSG_PLACA = "Placa já cadastrada com caminhão: %s";
+
     private static final String MSG_motorista = "Caminhão não encontrado";
 
     @Autowired
-    private MotoristaRepository motoristaRepository;
+    MotoristaRepository motoristaRepository;
 
 
-    public MotoristaDTO cadastarMotorista(MotoristaDTO motoristaDTO){
+    public MotoristaDTO cadastarMotorista(MotoristaDTO motoristaDTO) {
 
         Motorista motorista = converterMotoristaDTO(motoristaDTO);
         motorista = motoristaRepository.save(motorista);
@@ -31,13 +28,13 @@ public class MotoristaService {
     }
 
     public MotoristaDTO converterMotorista(Motorista motoristas) {
-       MotoristaDTO motoristaDTO = new MotoristaDTO();
-       motoristaDTO.setId(motoristas.getId());
-       motoristaDTO.setNome(motoristas.getNome());
-       motoristaDTO.setCpf(motoristas.getCpf());
-       motoristaDTO.setCnh(motoristas.getCnh());
-       motoristaDTO.setTelefone(motoristas.getTelefone());
-       return motoristaDTO;
+        MotoristaDTO motoristaDTO = new MotoristaDTO();
+        motoristaDTO.setId(motoristas.getId());
+        motoristaDTO.setNome(motoristas.getNome());
+        motoristaDTO.setCpf(motoristas.getCpf());
+        motoristaDTO.setCnh(motoristas.getCnh());
+        motoristaDTO.setTelefone(motoristas.getTelefone());
+        return motoristaDTO;
     }
 
     public Motorista converterMotoristaDTO(MotoristaDTO motoristaDTO) {
@@ -50,15 +47,15 @@ public class MotoristaService {
         return motorista;
     }
 
-    public void deletemotorista(Long id){
+    public void deletemotorista(Long id) {
         motoristaRepository.deleteById(id);
     }
 
     public MotoristaDTO updatemotorista(Long id, MotoristaDTO motoristaDTO) {
-      Motorista motoristaAtualizado = converterMotoristaDTO(motoristaDTO);
-      motoristaAtualizado.setId(id);
-      motoristaRepository.save(motoristaAtualizado);
-      return converterMotorista(motoristaAtualizado);
+        Motorista motoristaAtualizado = converterMotoristaDTO(motoristaDTO);
+        motoristaAtualizado.setId(id);
+        motoristaRepository.save(motoristaAtualizado);
+        return converterMotorista(motoristaAtualizado);
 
     }
 

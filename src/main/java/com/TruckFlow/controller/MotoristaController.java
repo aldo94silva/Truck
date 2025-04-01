@@ -15,36 +15,35 @@ import java.util.List;
 public class MotoristaController {
 
     @Autowired
-    private MotoristaRepository motoristaRepository;
-
-    @Autowired
-    private MotoristaService motoristaService;
+    MotoristaService motoristaService;
 
     @GetMapping()
     public List<MotoristaDTO> listarMotoristas() {
         return motoristaService.listarmotoristas();
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<MotoristaDTO> buscarMotoristaPorId (@PathVariable Long id){
+    public ResponseEntity<MotoristaDTO> buscarMotoristaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(motoristaService.buscarmotoristaPorId(id));
     }
 
     @PostMapping()
-    public ResponseEntity<MotoristaDTO> createMotorista (@RequestBody MotoristaDTO motoristaDTO){
-            MotoristaDTO motorista = motoristaService.cadastarMotorista(motoristaDTO);
-            return ResponseEntity.ok(motorista);
-        }
+    public ResponseEntity<MotoristaDTO> createMotorista(@RequestBody MotoristaDTO motoristaDTO) {
+        MotoristaDTO motorista = motoristaService.cadastarMotorista(motoristaDTO);
+        return ResponseEntity.ok(motorista);
+    }
 
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteMotorista (@PathVariable Long id){
-            motoristaService.deletemotorista(id);
-            return ResponseEntity.noContent().build();
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMotorista(@PathVariable Long id) {
+        motoristaService.deletemotorista(id);
+        return ResponseEntity.noContent().build();
+    }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<MotoristaDTO> updateMotoristas (@PathVariable Long id, @RequestBody MotoristaDTO MotoristaDTO){
-            MotoristaDTO motoristaAtualizado = motoristaService.updatemotorista(id, MotoristaDTO);
-            return ResponseEntity.ok(motoristaAtualizado);
+    @PutMapping("/{id}")
+    public ResponseEntity<MotoristaDTO> updateMotoristas(@PathVariable Long id,
+                                                         @RequestBody MotoristaDTO MotoristaDTO) {
+        MotoristaDTO motoristaAtualizado = motoristaService.updatemotorista(id, MotoristaDTO);
+        return ResponseEntity.ok(motoristaAtualizado);
     }
 }

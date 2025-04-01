@@ -23,16 +23,13 @@ public class CaminhaoService {
     CaminhaoRepository caminhaoRepository;
 
     @Autowired
-    private CaminhaoSpec caminhaoSpec;
+    CaminhaoSpec caminhaoSpec;
 
     @Autowired
-    private MotoristaService motoristaService;
-
-    @Autowired
-    private MotoristaRepository motoristaRepository;
+    MotoristaService motoristaService;
 
 
-    public CaminhaoDTO cadastarCaminhao(CaminhaoDTO caminhaoDTO){
+    public CaminhaoDTO cadastarCaminhao(CaminhaoDTO caminhaoDTO) {
 
         Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
         caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
@@ -74,15 +71,15 @@ public class CaminhaoService {
         return caminhao;
     }
 
-    public void deleteCaminhao(Long id){
+    public void deleteCaminhao(Long id) {
         caminhaoRepository.deleteById(id);
     }
 
     public CaminhaoDTO updateCaminhao(Long id, CaminhaoDTO caminhaoDTO) {
-      Caminhao caminhaoAtualizado = converterCaminhaoDTO(caminhaoDTO);
-      caminhaoAtualizado.setId(id);
-      caminhaoRepository.save(caminhaoAtualizado);
-      return converterCaminhao(caminhaoAtualizado);
+        Caminhao caminhaoAtualizado = converterCaminhaoDTO(caminhaoDTO);
+        caminhaoAtualizado.setId(id);
+        caminhaoRepository.save(caminhaoAtualizado);
+        return converterCaminhao(caminhaoAtualizado);
 
     }
 

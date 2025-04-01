@@ -22,7 +22,7 @@ public class ClienteService {
 //    @Autowired
 //    private ClienteSpec clienteSpec;
 
-    public ClienteDTO cadastarCliente(ClienteDTO clienteDTO){
+    public ClienteDTO cadastarCliente(ClienteDTO clienteDTO) {
 
 //        Cliente placaExistente = clienteRepository.findByPlaca(clienteDTO.getPlaca());
 //        clienteSpec.verificarSeExistePlacaDuplicada(placaExistente);
@@ -33,12 +33,12 @@ public class ClienteService {
     }
 
     public ClienteDTO converterCliente(Cliente clientes) {
-       ClienteDTO clienteDTO = new ClienteDTO();
-       clienteDTO.setId(clientes.getId());
-       clienteDTO.setNome(clientes.getNome());
-       clienteDTO.setCnpj_cpf(clientes.getCnpj_cpf());
-       clienteDTO.setTelefone(clientes.getTelefone());
-       return clienteDTO;
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setId(clientes.getId());
+        clienteDTO.setNome(clientes.getNome());
+        clienteDTO.setCnpj_cpf(clientes.getCnpj_cpf());
+        clienteDTO.setTelefone(clientes.getTelefone());
+        return clienteDTO;
     }
 
     public Cliente converterClienteDTO(ClienteDTO clienteDTO) {
@@ -50,15 +50,15 @@ public class ClienteService {
         return cliente;
     }
 
-    public void deleteCliente(Long id){
+    public void deleteCliente(Long id) {
         clienteRepository.deleteById(id);
     }
 
     public ClienteDTO updateCliente(Long id, ClienteDTO clienteDTO) {
-      Cliente clienteAtualizado = converterClienteDTO(clienteDTO);
-      clienteAtualizado.setId(id);
-      clienteRepository.save(clienteAtualizado);
-      return converterCliente(clienteAtualizado);
+        Cliente clienteAtualizado = converterClienteDTO(clienteDTO);
+        clienteAtualizado.setId(id);
+        clienteRepository.save(clienteAtualizado);
+        return converterCliente(clienteAtualizado);
 
     }
 

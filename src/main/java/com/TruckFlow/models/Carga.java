@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_carga")
-public class Carga{
+public class Carga {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

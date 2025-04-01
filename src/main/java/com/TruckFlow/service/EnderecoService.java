@@ -20,7 +20,7 @@ public class EnderecoService {
     EnderecoRepository enderecoRepository;
 
 
-    public EnderecoDTO cadastarEndereco(EnderecoDTO enderecoDTO){
+    public EnderecoDTO cadastarEndereco(EnderecoDTO enderecoDTO) {
 
         Endereco endereco = converterEnderecoDTO(enderecoDTO);
         endereco = enderecoRepository.save(endereco);
@@ -54,15 +54,15 @@ public class EnderecoService {
         return endereco;
     }
 
-    public void deleteEndereco(Long id){
+    public void deleteEndereco(Long id) {
         enderecoRepository.deleteById(id);
     }
 
     public EnderecoDTO updateEndereco(Long id, EnderecoDTO enderecoDTO) {
-      Endereco enderecoAtualizado = converterEnderecoDTO(enderecoDTO);
-      enderecoAtualizado.setId(id);
-      enderecoRepository.save(enderecoAtualizado);
-      return converterEndereco(enderecoAtualizado);
+        Endereco enderecoAtualizado = converterEnderecoDTO(enderecoDTO);
+        enderecoAtualizado.setId(id);
+        enderecoRepository.save(enderecoAtualizado);
+        return converterEndereco(enderecoAtualizado);
 
     }
 

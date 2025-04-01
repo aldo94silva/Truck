@@ -22,19 +22,19 @@ import static java.util.Objects.nonNull;
 public class CargaService {
 
     private static final String MSG_CARGA = "Carga não encontrada";
-   ;
+
 
     @Autowired
-    private CargaRepository cargaRepository;
+    CargaRepository cargaRepository;
 
     @Autowired
-    private FreteService freteService;
+    FreteService freteService;
 
     @Autowired
-    private CargaSpec cargaSpec;
+    CargaSpec cargaSpec;
 
 
-    public CargaDTO cadastarCarga(CargaDTO cargaDTO){
+    public CargaDTO cadastarCarga(CargaDTO cargaDTO) {
         Carga carga = converterCargaDTO(cargaDTO);
         carga = cargaRepository.save(carga);
         return converterCarga(carga);
@@ -67,21 +67,21 @@ public class CargaService {
         return carga;
     }
 
-    public void deleteCarga(Long id){
+    public void deleteCarga(Long id) {
         cargaRepository.deleteById(id);
     }
 
 
     public CargaDTO updateCarga(Long id, CargaDTO cargaDTO) {
-      cargaSpec.verificarCampoIdNulo(id);
+        cargaSpec.verificarCampoIdNulo(id);
 
 
-      Carga cargaAtualizado = converterCargaDTO(cargaDTO);
-      cargaAtualizado.setId(id);
+        Carga cargaAtualizado = converterCargaDTO(cargaDTO);
+        cargaAtualizado.setId(id);
         Carga carga = cargaRepository.findById(cargaDTO.getId())
                 .orElseThrow(() -> new BusinessExeption(MSG_CARGA));
-      cargaRepository.save(cargaAtualizado);
-      return converterCarga(cargaAtualizado);
+        cargaRepository.save(cargaAtualizado);
+        return converterCarga(cargaAtualizado);
     }
 
     public List<CargaDTO> listarCargas() {

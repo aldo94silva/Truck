@@ -15,36 +15,34 @@ import java.util.List;
 public class EnderecoController {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
-
-    @Autowired
-    private EnderecoService enderecoService;
+    EnderecoService enderecoService;
 
     @GetMapping()
     public List<EnderecoDTO> listarEnderecos() {
         return enderecoService.listarEnderecos();
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<EnderecoDTO> buscarEnderecoPorId (@PathVariable Long id){
+    public ResponseEntity<EnderecoDTO> buscarEnderecoPorId(@PathVariable Long id) {
         return ResponseEntity.ok(enderecoService.buscarEnderecoPorId(id));
     }
 
     @PostMapping()
-    public ResponseEntity<EnderecoDTO> createEndereco (@RequestBody EnderecoDTO enderecoDTO){
-            EnderecoDTO endereco = enderecoService.cadastarEndereco(enderecoDTO);
-            return ResponseEntity.ok(endereco);
-        }
+    public ResponseEntity<EnderecoDTO> createEndereco(@RequestBody EnderecoDTO enderecoDTO) {
+        EnderecoDTO endereco = enderecoService.cadastarEndereco(enderecoDTO);
+        return ResponseEntity.ok(endereco);
+    }
 
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteEndereco (@PathVariable Long id){
-            enderecoService.deleteEndereco(id);
-            return ResponseEntity.noContent().build();
-        }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
+        enderecoService.deleteEndereco(id);
+        return ResponseEntity.noContent().build();
+    }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<EnderecoDTO> updateEnderecos (@PathVariable Long id, @RequestBody EnderecoDTO EnderecoDTO){
-            EnderecoDTO enderecoAtualizado = enderecoService.updateEndereco(id, EnderecoDTO);
-            return ResponseEntity.ok(enderecoAtualizado);
+    @PutMapping("/{id}")
+    public ResponseEntity<EnderecoDTO> updateEnderecos(@PathVariable Long id, @RequestBody EnderecoDTO EnderecoDTO) {
+        EnderecoDTO enderecoAtualizado = enderecoService.updateEndereco(id, EnderecoDTO);
+        return ResponseEntity.ok(enderecoAtualizado);
     }
 }
