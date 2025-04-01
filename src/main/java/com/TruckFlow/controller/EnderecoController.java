@@ -32,10 +32,9 @@ public class EnderecoController {
         return ResponseEntity.ok(endereco);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEndereco(@PathVariable Long id) {
-        enderecoService.deleteEndereco(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteEndereco(@RequestBody EnderecoDTO enderecoDTO) {
+        enderecoService.deleteEndereco(enderecoDTO);
         return ResponseEntity.noContent().build();
     }
 

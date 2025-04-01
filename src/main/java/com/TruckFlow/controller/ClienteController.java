@@ -2,7 +2,6 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.ClienteDTO;
-import com.TruckFlow.repository.ClienteRepository;
 import com.TruckFlow.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +33,9 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
-        clienteService.deleteCliente(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteCliente(@RequestBody ClienteDTO clienteDTO) {
+        clienteService.deleteCliente(clienteDTO);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,13 +1,9 @@
 package com.TruckFlow.service;
 
-import com.TruckFlow.dtos.CaminhaoDTO;
+
 import com.TruckFlow.dtos.CargaDTO;
-import com.TruckFlow.dtos.FreteDTO;
-import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Carga;
-import com.TruckFlow.repository.CaminhaoRepository;
 import com.TruckFlow.repository.CargaRepository;
 import com.TruckFlow.spec.CargaSpec;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +12,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.nonNull;
+import static java.util.Objects.isNull;
+
 
 @Service
 public class CargaService {
 
     private static final String MSG_CARGA = "Carga não encontrada";
-
 
     @Autowired
     CargaRepository cargaRepository;
@@ -53,7 +49,6 @@ public class CargaService {
         return cargaDTO;
     }
 
-
     public Carga converterCargaDTO(CargaDTO cargaDTO) {
         Carga carga = new Carga();
         carga.setId(cargaDTO.getId());
@@ -67,10 +62,13 @@ public class CargaService {
         return carga;
     }
 
-    public void deleteCarga(Long id) {
-        cargaRepository.deleteById(id);
-    }
+    public void deleteCarga(CargaDTO cargaDTO) {
+        if (isNull(cargaDTO.getId())) {
+            throw new BusinessExeption("Carga não encontrada");
+        }
 
+        cargaRepository.deleteById(cargaDTO.getId());
+    }
 
     public CargaDTO updateCarga(Long id, CargaDTO cargaDTO) {
         cargaSpec.verificarCampoIdNulo(id);

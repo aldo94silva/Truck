@@ -1,11 +1,7 @@
 package com.TruckFlow.controller;
 
 
-import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.CargaDTO;
-import com.TruckFlow.repository.CaminhaoRepository;
-import com.TruckFlow.repository.CargaRepository;
-import com.TruckFlow.service.CaminhaoService;
 import com.TruckFlow.service.CargaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +32,9 @@ public class CargaController {
         return ResponseEntity.ok(cargaDTO);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCarga(@PathVariable Long id) {
-        cargaService.deleteCarga(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteCarga(@RequestBody CargaDTO cargaDTO) {
+        cargaService.deleteCarga(cargaDTO);
         return ResponseEntity.noContent().build();
     }
 

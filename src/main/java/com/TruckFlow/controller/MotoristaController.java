@@ -2,7 +2,6 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.MotoristaDTO;
-import com.TruckFlow.repository.MotoristaRepository;
 import com.TruckFlow.service.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,21 +28,19 @@ public class MotoristaController {
 
     @PostMapping()
     public ResponseEntity<MotoristaDTO> createMotorista(@RequestBody MotoristaDTO motoristaDTO) {
-        MotoristaDTO motorista = motoristaService.cadastarMotorista(motoristaDTO);
+        MotoristaDTO motorista = motoristaService.cadastrarMotorista(motoristaDTO);
         return ResponseEntity.ok(motorista);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMotorista(@PathVariable Long id) {
-        motoristaService.deletemotorista(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteMotorista(@RequestBody MotoristaDTO motoristaDTO) {
+        motoristaService.deletemotorista(motoristaDTO);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MotoristaDTO> updateMotoristas(@PathVariable Long id,
-                                                         @RequestBody MotoristaDTO MotoristaDTO) {
-        MotoristaDTO motoristaAtualizado = motoristaService.updatemotorista(id, MotoristaDTO);
+    @PutMapping
+    public ResponseEntity<MotoristaDTO> updateMotoristas(@RequestBody MotoristaDTO motoristaDTO) {
+        MotoristaDTO motoristaAtualizado = motoristaService.updatemotorista(motoristaDTO);
         return ResponseEntity.ok(motoristaAtualizado);
     }
 }

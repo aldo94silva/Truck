@@ -55,7 +55,6 @@ public class CaminhaoService {
         return caminhaoDTO;
     }
 
-
     public Caminhao converterCaminhaoDTO(CaminhaoDTO caminhaoDTO) {
         Caminhao caminhao = new Caminhao();
         caminhao.setId(caminhaoDTO.getId());
@@ -77,7 +76,6 @@ public class CaminhaoService {
         }
         caminhaoRepository.deleteById(caminhaoDTO.getId());
     }
-
 
     public CaminhaoDTO updateCaminhao(CaminhaoDTO caminhaoDTO) {
         Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());

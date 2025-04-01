@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class FreteService {
 
@@ -28,6 +30,7 @@ public class FreteService {
 
     @Autowired
     EnderecoService enderecoService;
+
 
     public FreteDTO cadastarFrete(FreteDTO freteDTO) {
         Frete frete = converterFreteDTO(freteDTO);
@@ -57,7 +60,6 @@ public class FreteService {
         return freteDTO;
     }
 
-
     public Frete converterFreteDTO(FreteDTO freteDTO) {
         Frete frete = new Frete();
         frete.setId(freteDTO.getId());
@@ -80,8 +82,11 @@ public class FreteService {
         return frete;
     }
 
-    public void deleteFrete(Long id) {
-        freteRepository.deleteById(id);
+    public void deleteFrete(FreteDTO freteDTO) {
+        if (isNull(freteDTO.getId())) {
+            throw new BusinessExeption("Frete não encontrado");
+        }
+        freteRepository.deleteById(freteDTO.getId());
     }
 
     public FreteDTO updateFrete(Long id, FreteDTO freteDTO) {

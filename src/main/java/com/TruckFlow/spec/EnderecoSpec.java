@@ -24,13 +24,6 @@ public class EnderecoSpec {
 
     }
 
-    public void verificarSeExistePlacaDuplicada(Caminhao caminhao) {
-        if (nonNull(caminhao)) {
-            throw new BusinessExeption(
-                    String.format(MSG_PLACA, caminhao.getPlaca()));
-        }
-    }
-
 //    public void verificarPlacaEmUso(Caminhao caminhao, CaminhaoDTO caminhaoDTO) {
 //        boolean alterouPlaca = (!(caminhao.getPlaca().equals(caminhaoDTO.getPlaca())));
 //

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class ClienteService {
 
@@ -23,9 +25,6 @@ public class ClienteService {
 //    private ClienteSpec clienteSpec;
 
     public ClienteDTO cadastarCliente(ClienteDTO clienteDTO) {
-
-//        Cliente placaExistente = clienteRepository.findByPlaca(clienteDTO.getPlaca());
-//        clienteSpec.verificarSeExistePlacaDuplicada(placaExistente);
 
         Cliente cliente = converterClienteDTO(clienteDTO);
         cliente = clienteRepository.save(cliente);
@@ -50,8 +49,11 @@ public class ClienteService {
         return cliente;
     }
 
-    public void deleteCliente(Long id) {
-        clienteRepository.deleteById(id);
+    public void deleteCliente(ClienteDTO clienteDTO) {
+        if (isNull(clienteDTO.getId())) {
+            throw new BusinessExeption("Cliente não encontrado");
+        }
+        clienteRepository.deleteById(clienteDTO.getId());
     }
 
     public ClienteDTO updateCliente(Long id, ClienteDTO clienteDTO) {

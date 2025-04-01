@@ -35,12 +35,12 @@ public class CaminhaoSpec {
 
 
 
-    public void verificarPlacaEmUso(Caminhao caminhao, CaminhaoDTO caminhaoDTO) {
-        boolean alterouPlaca = (!(caminhao.getPlaca().equals(caminhaoDTO.getPlaca())));
-
-        if ((alterouPlaca) && (nonNull(caminhaoDTO.findByPlaca(caminhaoDTO.getPlaca())))) {
-            throw new BusinessExeption(
-                    String.format(MSG_PLACA, caminhaoDTO.getPlaca()));
-        }
-    }
+//    public void verificarPlacaEmUso(Caminhao caminhao, CaminhaoDTO caminhaoDTO) {
+//        boolean alterouPlaca = (!(caminhao.getPlaca().equals(caminhaoDTO.getPlaca())));
+//
+//        if ((alterouPlaca) && (nonNull(caminhaoDTO.findByPlaca(caminhaoDTO.getPlaca())))) {
+//            throw new BusinessExeption(
+//                    String.format(MSG_PLACA, caminhaoDTO.getPlaca()));
+//        }
+//    }
 }

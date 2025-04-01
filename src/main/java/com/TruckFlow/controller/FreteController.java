@@ -2,7 +2,6 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.FreteDTO;
-import com.TruckFlow.repository.FreteRepository;
 import com.TruckFlow.service.FreteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +32,9 @@ public class FreteController {
         return ResponseEntity.ok(frete);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFrete(@PathVariable Long id) {
-        freteService.deleteFrete(id);
+    @DeleteMapping()
+    public ResponseEntity<Void> deleteFrete(@RequestBody FreteDTO freteDTO) {
+        freteService.deleteFrete(freteDTO);
         return ResponseEntity.noContent().build();
     }
 

@@ -2,7 +2,6 @@ package com.TruckFlow.controller;
 
 
 import com.TruckFlow.dtos.CaminhaoDTO;
-import com.TruckFlow.dtos.EnderecoDTO;
 import com.TruckFlow.service.CaminhaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +32,9 @@ public class CaminhaoController {
         return ResponseEntity.ok(caminhao);
     }
 
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping()
     public ResponseEntity<Void> deleteCaminhao(@RequestBody CaminhaoDTO caminhaoDTO) {
-        CaminhaoDTO caminhao =caminhaoService.cadastarCaminhao(caminhaoDTO);
+        caminhaoService.deleteCaminhao(caminhaoDTO);
         return ResponseEntity.noContent().build();
     }
 

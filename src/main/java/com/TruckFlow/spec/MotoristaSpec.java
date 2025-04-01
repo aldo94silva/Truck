@@ -1,5 +1,6 @@
 package com.TruckFlow.spec;
 
+import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Motorista;
@@ -27,26 +28,18 @@ public class MotoristaSpec {
 
     }
 
-    public void verificarSeExisteCpfDuplicada(Motorista motorista) {
-        if (nonNull(motorista)) {
-            throw new BusinessExeption(
-                    String.format(MSG_CPF, motorista.getCpf()));
+    public void verificarSeExisteDuplicidade(Motorista existente, MotoristaDTO novoMotorista) {
+        if (existente.getCpf().equals(novoMotorista.getCpf())) {
+            throw new BusinessExeption(MSG_CPF);
+        }
+        if (existente.getCnh().equals(novoMotorista.getCnh())) {
+            throw new BusinessExeption(MSG_CNH);
+        }
+        if (existente.getTelefone().equals(novoMotorista.getTelefone())) {
+            throw new BusinessExeption(MSG_TELEFONE);
         }
     }
 
-    public void verificarSeExisteCnhDuplicada(Motorista motorista) {
-        if (nonNull(motorista)) {
-            throw new BusinessExeption(
-                    String.format(MSG_CNH, motorista.getCnh()));
-        }
-    }
-
-    public void verificarSeExisteTelefoneDuplicada(Motorista motorista) {
-        if (nonNull(motorista)) {
-            throw new BusinessExeption(
-                    String.format(MSG_CNH, motorista.getTelefone()));
-        }
-    }
 
 //    public void verificarPlacaEmUso(Caminhao caminhao, CaminhaoDTO caminhaoDTO) {
 //        boolean alterouPlaca = (!(caminhao.getPlaca().equals(caminhaoDTO.getPlaca())));
