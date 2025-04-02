@@ -40,9 +40,9 @@ public class CargaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CargaDTO> updateCarga(@PathVariable Long id, @RequestBody CargaDTO cargaDTO) {
-        CargaDTO cargaAtualizada = cargaService.updateCarga(id, cargaDTO);
+    @PutMapping()
+    public ResponseEntity<CargaDTO> updateCarga( @RequestBody CargaDTO cargaDTO) {
+        CargaDTO cargaAtualizada = cargaService.updateCarga(cargaDTO);
         return ResponseEntity.ok(cargaAtualizada);
     }
 }

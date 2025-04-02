@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 public class MotoristaService {
 
 
-    private static final String MSG_MOTORISTA = "Caminhão não encontrado";
+    private static final String MSG_MOTORISTA = "Motorista não encontrado";
 
     @Autowired
     MotoristaRepository motoristaRepository;

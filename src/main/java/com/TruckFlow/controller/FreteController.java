@@ -1,6 +1,7 @@
 package com.TruckFlow.controller;
 
 
+import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.dtos.FreteDTO;
 import com.TruckFlow.service.FreteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,8 @@ public class FreteController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<FreteDTO> updateFretes(@PathVariable Long id, @RequestBody FreteDTO FreteDTO) {
-        FreteDTO freteAtualizado = freteService.updateFrete(id, FreteDTO);
-        return ResponseEntity.ok(freteAtualizado);
+    @PutMapping()
+    public ResponseEntity<FreteDTO> updateFretes(@RequestBody FreteDTO freteDTO) {
+        return ResponseEntity.ok(freteService.updateFrete(freteDTO));
     }
 }

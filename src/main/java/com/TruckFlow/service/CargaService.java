@@ -67,12 +67,12 @@ public class CargaService {
         cargaRepository.deleteById(cargaDTO.getId());
     }
 
-    public CargaDTO updateCarga(Long id, CargaDTO cargaDTO) {
-        cargaSpec.verificarCampoIdNulo(id);
+    public CargaDTO updateCarga(CargaDTO cargaDTO) {
+        cargaSpec.verificarCampoIdNulo(cargaDTO.getId());
         Carga cargaAtualizado = converterCargaDTO(cargaDTO);
-        cargaAtualizado.setId(id);
         Carga carga = cargaRepository.findById(cargaDTO.getId())
                 .orElseThrow(() -> new BusinessExeption(MSG_CARGA));
+
         cargaRepository.save(cargaAtualizado);
         return converterCarga(cargaAtualizado);
     }

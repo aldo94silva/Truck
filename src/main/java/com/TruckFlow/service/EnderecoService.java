@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.isNull;
-
 @Service
 public class EnderecoService {
 
-    private static final String MSG_CAMINHAO = "Caminhão não encontrado";
+    private static final String MSG_ENDERECO = "Endereço não encontrado";
 
     @Autowired
     EnderecoRepository enderecoRepository;
@@ -63,8 +61,8 @@ public class EnderecoService {
     }
 
     public EnderecoDTO updateEndereco(Long id, EnderecoDTO enderecoDTO) {
-        Endereco enderecoAtualizado = converterEnderecoDTO(enderecoDTO);
-        enderecoAtualizado.setId(id);
+
+        Endereco  enderecoAtualizado = converterEnderecoDTO(enderecoDTO);
         enderecoRepository.save(enderecoAtualizado);
         return converterEndereco(enderecoAtualizado);
 
@@ -76,7 +74,7 @@ public class EnderecoService {
 
     public EnderecoDTO buscarEnderecoPorId(Long id) {
         Endereco endereco = enderecoRepository.findById(id)
-                .orElseThrow(() -> new BusinessExeption(MSG_CAMINHAO));
+                .orElseThrow(() -> new BusinessExeption(MSG_ENDERECO));
 
         return converterEndereco(endereco);
     }

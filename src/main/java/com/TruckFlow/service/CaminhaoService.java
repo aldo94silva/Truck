@@ -77,13 +77,9 @@ public class CaminhaoService {
 
     public CaminhaoDTO updateCaminhao(CaminhaoDTO caminhaoDTO) {
         caminhaoSpec.verificarCampoIdNulo(caminhaoDTO.getId());
-        Caminhao placaExistente = caminhaoRepository.findByPlaca(caminhaoDTO.getPlaca());
-        caminhaoSpec.verificarSeExistePlacaDuplicada(placaExistente);
-
         Caminhao caminhaoAtualizado = converterCaminhaoDTO(caminhaoDTO);
         caminhaoRepository.save(caminhaoAtualizado);
         return converterCaminhao(caminhaoAtualizado);
-
     }
 
     public List<CaminhaoDTO> listarCaminhaos() {

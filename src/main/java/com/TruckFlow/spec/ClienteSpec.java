@@ -16,7 +16,6 @@ import static java.util.Objects.nonNull;
 @Service
 public class ClienteSpec {
 
-
     private static final String MSG_ID = "Cleinte não encontrado";
     private static final String MSG_CPF = "CPF já cadastrado com o cliente: %s";
     private static final String MSG_TELEFONE = "Telefone cadastrado com o cliente: %s";

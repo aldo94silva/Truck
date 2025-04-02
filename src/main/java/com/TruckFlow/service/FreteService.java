@@ -2,6 +2,7 @@ package com.TruckFlow.service;
 
 import com.TruckFlow.dtos.*;
 import com.TruckFlow.exceptions.BusinessExeption;
+import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Frete;
 import com.TruckFlow.repository.EnderecoRepository;
 import com.TruckFlow.repository.FreteRepository;
@@ -90,12 +91,10 @@ public class FreteService {
         freteRepository.deleteById(freteDTO.getId());
     }
 
-    public FreteDTO updateFrete(Long id, FreteDTO freteDTO) {
+    public FreteDTO updateFrete(FreteDTO freteDTO) {
         Frete freteAtualizado = converterFreteDTO(freteDTO);
-        freteAtualizado.setId(id);
         freteRepository.save(freteAtualizado);
         return converterFrete(freteAtualizado);
-
     }
 
     public List<FreteDTO> listarFrete() {
