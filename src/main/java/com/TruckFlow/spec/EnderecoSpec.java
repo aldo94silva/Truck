@@ -12,9 +12,6 @@ import static java.util.Objects.nonNull;
 @Service
 public class EnderecoSpec {
 
-    @Autowired
-    private CaminhaoRepository caminhaoRepository;
-
     private static final String MSG_ID = "Endereco não encontrado";
 
 

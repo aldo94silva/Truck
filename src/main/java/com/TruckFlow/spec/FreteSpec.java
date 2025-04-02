@@ -12,9 +12,6 @@ import static java.util.Objects.nonNull;
 @Service
 public class FreteSpec {
 
-    @Autowired
-    private CaminhaoRepository caminhaoRepository;
-
     private static final String MSG_ID = "Frete não encontrado";
 
 

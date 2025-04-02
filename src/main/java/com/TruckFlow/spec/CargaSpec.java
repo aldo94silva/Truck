@@ -11,7 +11,7 @@ import static java.util.Objects.isNull;
 public class CargaSpec {
 
     @Autowired
-    private CargaRepository cargaRepository;
+    CargaRepository cargaRepository;
 
     private static final String MSG_ID = "Carga não encontrada";
 

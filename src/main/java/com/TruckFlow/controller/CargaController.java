@@ -29,9 +29,9 @@ public class CargaController {
 
     @PostMapping()
     public ResponseEntity<CargaDTO> createCarga(@RequestBody CargaDTO cargaDTO) {
-        cargaService.cadastarCarga(cargaDTO);
+        CargaDTO carga = cargaService.cadastarCarga(cargaDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(cargaDTO);
+                .body(carga);
     }
 
     @DeleteMapping()

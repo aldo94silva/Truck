@@ -14,9 +14,6 @@ import static java.util.Objects.nonNull;
 @Service
 public class MotoristaSpec {
 
-    @Autowired
-    private CaminhaoRepository caminhaoRepository;
-
     private static final String MSG_ID = "Caminhão não encontrado";
     private static final String MSG_CPF = "CPF já cadastrado com o motorista: %s";
     private static final String MSG_CNH = "CNH cadastrada com o motorista: %s";
@@ -30,13 +27,13 @@ public class MotoristaSpec {
 
     public void verificarSeExisteDuplicidade(Motorista existente, MotoristaDTO novoMotorista) {
         if (existente.getCpf().equals(novoMotorista.getCpf())) {
-            throw new BusinessExeption(MSG_CPF);
+            throw new BusinessExeption(String.format(MSG_CPF, existente.getNome()));
         }
         if (existente.getCnh().equals(novoMotorista.getCnh())) {
-            throw new BusinessExeption(MSG_CNH);
+            throw new BusinessExeption(String.format(MSG_CNH, existente.getNome()));
         }
         if (existente.getTelefone().equals(novoMotorista.getTelefone())) {
-            throw new BusinessExeption(MSG_TELEFONE);
+            throw new BusinessExeption(String.format(MSG_TELEFONE, existente.getNome()));
         }
     }
 

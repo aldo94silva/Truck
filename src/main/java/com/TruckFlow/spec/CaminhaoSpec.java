@@ -1,10 +1,9 @@
 package com.TruckFlow.spec;
 
-import com.TruckFlow.dtos.CaminhaoDTO;
+
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.repository.CaminhaoRepository;
-import com.TruckFlow.repository.CargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +12,6 @@ import static java.util.Objects.nonNull;
 
 @Service
 public class CaminhaoSpec {
-
-    @Autowired
-    private CaminhaoRepository caminhaoRepository;
 
     private static final String MSG_ID = "Id não pode ser nulo";
     private static final String MSG_PLACA = "Caminhão já cadastrado com esta placa: %s";
