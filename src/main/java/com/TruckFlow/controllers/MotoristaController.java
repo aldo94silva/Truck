@@ -1,8 +1,8 @@
-package com.TruckFlow.controller;
+package com.TruckFlow.controllers;
 
 
 import com.TruckFlow.dtos.MotoristaDTO;
-import com.TruckFlow.service.MotoristaService;
+import com.TruckFlow.services.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

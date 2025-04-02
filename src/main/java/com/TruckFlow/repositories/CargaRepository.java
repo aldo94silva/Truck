@@ -1,6 +1,5 @@
-package com.TruckFlow.repository;
+package com.TruckFlow.repositories;
 
-import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Carga;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,20 +1,15 @@
-package com.TruckFlow.service;
+package com.TruckFlow.services;
 
 import com.TruckFlow.dtos.*;
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Frete;
-import com.TruckFlow.repository.EnderecoRepository;
-import com.TruckFlow.repository.FreteRepository;
-import com.TruckFlow.repository.MotoristaRepository;
-import com.TruckFlow.spec.FreteSpec;
+import com.TruckFlow.repositories.FreteRepository;
+import com.TruckFlow.specs.FreteSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.isNull;
 
 @Service
 public class FreteService {

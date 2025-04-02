@@ -1,10 +1,10 @@
-package com.TruckFlow.service;
+package com.TruckFlow.services;
 
 import com.TruckFlow.dtos.EnderecoDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Endereco;
-import com.TruckFlow.repository.EnderecoRepository;
-import com.TruckFlow.spec.EnderecoSpec;
+import com.TruckFlow.repositories.EnderecoRepository;
+import com.TruckFlow.specs.EnderecoSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

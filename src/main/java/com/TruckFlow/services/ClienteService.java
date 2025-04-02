@@ -1,19 +1,16 @@
-package com.TruckFlow.service;
+package com.TruckFlow.services;
 
 import com.TruckFlow.dtos.ClienteDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Cliente;
-import com.TruckFlow.models.Motorista;
-import com.TruckFlow.repository.ClienteRepository;
-import com.TruckFlow.spec.ClienteSpec;
+import com.TruckFlow.repositories.ClienteRepository;
+import com.TruckFlow.specs.ClienteSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.isNull;
 
 @Service
 public class ClienteService {

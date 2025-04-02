@@ -1,17 +1,15 @@
-package com.TruckFlow.service;
+package com.TruckFlow.services;
 
 import com.TruckFlow.dtos.CaminhaoDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
-import com.TruckFlow.repository.CaminhaoRepository;
-import com.TruckFlow.spec.CaminhaoSpec;
+import com.TruckFlow.repositories.CaminhaoRepository;
+import com.TruckFlow.specs.CaminhaoSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.isNull;
 
 
 @Service

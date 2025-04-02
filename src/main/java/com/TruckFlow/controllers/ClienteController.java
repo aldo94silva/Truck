@@ -1,8 +1,8 @@
-package com.TruckFlow.controller;
+package com.TruckFlow.controllers;
 
 
 import com.TruckFlow.dtos.ClienteDTO;
-import com.TruckFlow.service.ClienteService;
+import com.TruckFlow.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,19 +1,16 @@
-package com.TruckFlow.service;
+package com.TruckFlow.services;
 
 import com.TruckFlow.dtos.MotoristaDTO;
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.models.Caminhao;
 import com.TruckFlow.models.Motorista;
-import com.TruckFlow.repository.MotoristaRepository;
-import com.TruckFlow.spec.MotoristaSpec;
+import com.TruckFlow.repositories.MotoristaRepository;
+import com.TruckFlow.specs.MotoristaSpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.Objects.isNull;
 
 @Service
 public class MotoristaService {

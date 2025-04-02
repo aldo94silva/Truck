@@ -1,7 +1,7 @@
-package com.TruckFlow.spec;
+package com.TruckFlow.specs;
 
 import com.TruckFlow.exceptions.BusinessExeption;
-import com.TruckFlow.repository.CargaRepository;
+import com.TruckFlow.repositories.CargaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

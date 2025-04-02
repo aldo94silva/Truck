@@ -1,10 +1,8 @@
-package com.TruckFlow.spec;
+package com.TruckFlow.specs;
 
 
 import com.TruckFlow.exceptions.BusinessExeption;
 import com.TruckFlow.models.Caminhao;
-import com.TruckFlow.repository.CaminhaoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static java.util.Objects.isNull;

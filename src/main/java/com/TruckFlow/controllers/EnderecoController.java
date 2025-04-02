@@ -1,8 +1,8 @@
-package com.TruckFlow.controller;
+package com.TruckFlow.controllers;
 
 
 import com.TruckFlow.dtos.EnderecoDTO;
-import com.TruckFlow.service.EnderecoService;
+import com.TruckFlow.services.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
